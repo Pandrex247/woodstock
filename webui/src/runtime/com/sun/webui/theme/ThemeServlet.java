@@ -202,6 +202,13 @@ public class ThemeServlet extends HttpServlet {
             log("doGet()");
         }
         String resourceName = request.getPathInfo();
+        
+        if (resourceName.contains("/.."))
+        {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
+            return;
+        }
+        
         InputStream inStream = null;
         OutputStream outStream = null;
         try {
